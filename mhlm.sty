@@ -1,0 +1,114 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mhlm}[2023/10/05 A package with useful Latex commands]
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+\RequirePackage{hyperref}
+\RequirePackage{fancyvrb}
+\RequirePackage[nameinlink]{cleveref}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{light}{RGB}{255,255,227}
+\definecolor{lightblue}{rgb}{0.6,0.8,1.0}
+
+\lstdefinestyle{code}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breakindent=3ex
+}
+\lstdefinestyle{bash}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=bash,
+    breakindent=3ex
+}
+\lstdefinestyle{commandline}{
+    backgroundcolor=\color{black},
+    basicstyle=\ttfamily\small\color{white},
+    xleftmargin=0.05\textwidth,
+    xrightmargin=0.05\textwidth,
+    escapechar=§,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=bash,
+    prebreak={\textbackslash},
+    breakindent=3ex
+}
+\lstdefinestyle{result}{
+    backgroundcolor=\color{lightblue},
+    basicstyle=\ttfamily\small\color{black}\center,
+    xleftmargin=0.1\textwidth,
+    xrightmargin=0.1\textwidth,
+    escapechar=§,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=t,
+    keepspaces=true,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    breakindent=3ex,
+}
+
+% load from file #1 using language #2, caption #3, label #4
+\newcommand{\mhlmFileCode}[4]{
+    \lstinputlisting[style=code, language=#2, caption=#3, captionpos=t, label=#4]{#1}
+}
+\newcommand{\mhlmFileVerb}[3]{
+    \lstinputlisting[captionpos=t, caption=#2, label=#3, style=result]{#1}
+}
+\newcommand{\mhlmFileCommand}[3]{
+    \lstinputlisting[style=commandline, caption=#2, captionpos=t, label=#3]{#1}
+}
+% special box for regex
+\newcommand{\mhlmRegex}[1]{\mbox{\colorbox{red!30}{\lowercase{#1}}}}
+% General purpose output field
+\newcommand{\mhlmResult}[3]{
+    \lstinputlisting[style=result, caption=#2, captionpos=t, label=#3]{#1}
+}
+
+% Inline text with linebreaks
+\newcommand{\bltInlineVerb}[1]{\lstinline[breaklines=true,basicstyle=\ttfamily,breakindent=0pt]{#1}}
+% promt for usage in command line
+\newcommand{\mhlmPromptBash}[0]{\mbox{\space bash\$-\space}}
+% prompt shown in latex
+\newcommand{\mhlmPromptGdb}[0]{\mbox{(gdb)}}
